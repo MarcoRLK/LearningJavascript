@@ -1,0 +1,42 @@
+body {
+  font-family: "helvetica neue";
+  color: #666;
+  padding: 0 20%;
+}
+
+.panel {
+  float: left;
+  margin: 10px 20px 20px 20px;
+  position: relative;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  width: 150px;
+}
+
+.panel-heading {
+  background-color: #666;
+  color: white;
+  text-align: center;
+}
+
+.panel-body {
+  background-color: #e6e6e6;
+  font-family: arial;
+  font-weight: lighter;
+  color: black;
+  text-align: center;
+  height: 120px
+}
+
+.panel-jump{
+  float: left;
+  margin: 10px 20px 20px 20px;
+  position: relative;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, .5);
+  width: 150px;
+  animation: mymove 0.1s infinite;
+}
+
+@keyframes mymove {
+    from {left: 0px;}
+    to {left: 2px;}
+}
