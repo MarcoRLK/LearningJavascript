@@ -6,6 +6,8 @@ window.onload = function() {
   createEnemies();
 };
 
+const NUM_OF_ENEMIES = 5;
+
 //main char position
 var px = 10;
 var py = 10;
@@ -15,7 +17,13 @@ var yv = 0; // y velocity
 var ex = 20; //x enemy position
 var ey = 0; //y enemy position
 
+var enemies = [];
 
+function Enemy (posx, posy) {
+  this.posx = posx;
+  this.posy = posy;
+
+}
 
 function game() {
 
@@ -29,7 +37,7 @@ function game() {
   ctx.fillStyle = "white";
   ctx.fillRect(px * gs, py * gs, gs - 2, gs - 2);
 
-  moveEnemy();
+  moveEnemies();
 
 }
 
@@ -58,12 +66,17 @@ function keyPush(evt) {
 
 function createEnemies() {
 
-    ey = (Math.random() * 20);
+  for (var aux = 0; aux < NUM_OF_ENEMIES; aux++) {
+    var newEnemy = new Enemy((Math.random() * 20 + 20), Math.random() * 20);
+    enemies[aux] = newEnemy;
+  }
 
 }
 
-function moveEnemy(){
+function moveEnemies() {
   ctx.fillStyle = "red";
-  ex = ex - 1;  
-  ctx.fillRect(ex*gs , ey * gs, gs - 2, gs - 2);
+  for (var aux = 0; aux < NUM_OF_ENEMIES; aux++) {
+    enemies[aux].posx = enemies[aux].posx - 1;
+    ctx.fillRect(enemies[aux].posx * gs, enemies[aux].posy * gs, gs - 2, gs - 2);
+  }
 }
