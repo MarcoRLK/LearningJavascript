@@ -27,8 +27,7 @@ function Enemy (posx, posy) {
 
 function game() {
 
-  px = px + xv;
-  py = py + yv;
+  moveMainChar();
 
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canv.width, canv.height);
@@ -70,6 +69,23 @@ function createEnemies() {
     var newEnemy = new Enemy((Math.random() * 20 + 20), Math.random() * 20);
     enemies[aux] = newEnemy;
   }
+
+}
+
+function moveMainChar (){
+
+  // the conditions below will avoid the char from getting out of the canvas
+  if ((xv < 0 && px == 0) || (xv > 0 && px == 19)){
+    return;
+  }
+  if ((yv < 0 && py == 0) || (yv > 0 && py == 19)){
+    return;
+  }
+
+  px = px + xv;
+  py = py + yv;
+  xv = 0;
+  yv = 0;
 
 }
 
