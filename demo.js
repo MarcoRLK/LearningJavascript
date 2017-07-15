@@ -16,6 +16,7 @@ var xv = 0; //x velocity
 var yv = 0; // y velocity
 var ex = 20; //x enemy position
 var ey = 0; //y enemy position
+var points = 0;
 
 var enemies = [];
 
@@ -27,6 +28,7 @@ function Enemy (posx, posy) {
 
 function game() {
 
+  points++;
   moveMainChar();
 
   ctx.fillStyle = "black";
@@ -66,7 +68,7 @@ function keyPush(evt) {
 function createEnemies() {
 
   for (var aux = 0; aux < NUM_OF_ENEMIES; aux++) {
-    var newEnemy = new Enemy((Math.random() * 20 + 20), Math.random() * 20);
+    var newEnemy = new Enemy(Math.floor((Math.random() * 20) + 25), Math.floor(Math.random() * 20));
     enemies[aux] = newEnemy;
   }
 
@@ -94,5 +96,16 @@ function moveEnemies() {
   for (var aux = 0; aux < NUM_OF_ENEMIES; aux++) {
     enemies[aux].posx = enemies[aux].posx - 1;
     ctx.fillRect(enemies[aux].posx * gs, enemies[aux].posy * gs, gs - 2, gs - 2);
+    //check colison
+    if (enemies[aux].posx == px && enemies[aux].posy == py){
+      resetGame();
+    }
   }
+}
+
+function resetGame() {
+  points = 0;
+  px = 10;
+  py = 10;
+  createEnemies() ;
 }
