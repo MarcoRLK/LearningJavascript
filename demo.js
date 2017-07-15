@@ -7,6 +7,7 @@ window.onload = function() {
 };
 
 const NUM_OF_ENEMIES = 5;
+var screenPoints = document.getElementById('points');
 
 //main char position
 var px = 10;
@@ -20,7 +21,7 @@ var points = 0;
 
 var enemies = [];
 
-function Enemy (posx, posy) {
+function Enemy(posx, posy) {
   this.posx = posx;
   this.posy = posy;
 
@@ -29,6 +30,7 @@ function Enemy (posx, posy) {
 function game() {
 
   points++;
+  screenPoints.innerHTML = 'PONTOS: ' + points;
   moveMainChar();
 
   ctx.fillStyle = "black";
@@ -74,13 +76,13 @@ function createEnemies() {
 
 }
 
-function moveMainChar (){
+function moveMainChar() {
 
   // the conditions below will avoid the char from getting out of the canvas
-  if ((xv < 0 && px == 0) || (xv > 0 && px == 19)){
+  if ((xv < 0 && px == 0) || (xv > 0 && px == 19)) {
     return;
   }
-  if ((yv < 0 && py == 0) || (yv > 0 && py == 19)){
+  if ((yv < 0 && py == 0) || (yv > 0 && py == 19)) {
     return;
   }
 
@@ -97,8 +99,13 @@ function moveEnemies() {
     enemies[aux].posx = enemies[aux].posx - 1;
     ctx.fillRect(enemies[aux].posx * gs, enemies[aux].posy * gs, gs - 2, gs - 2);
     //check colison
-    if (enemies[aux].posx == px && enemies[aux].posy == py){
+    if (enemies[aux].posx == px && enemies[aux].posy == py) {
       resetGame();
+    }
+    //reset enemies
+    if (enemies[aux].posx < -1) {
+      enemies[aux].posx = Math.floor((Math.random() * 20) + 20);
+      enemies[aux].posy = Math.floor(Math.random() * 20);
     }
   }
 }
@@ -107,5 +114,5 @@ function resetGame() {
   points = 0;
   px = 10;
   py = 10;
-  createEnemies() ;
+  createEnemies();
 }
